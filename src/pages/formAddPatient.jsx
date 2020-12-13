@@ -1,6 +1,6 @@
-import React from 'react'
-import { Navbar } from '../components/'
-import AddIcon from '../assets/patient.png'
+import React from "react";
+import { Navbar } from "../components/";
+import AddIcon from "../assets/patient.png";
 
 function FormPatient() {
   return (
@@ -43,7 +43,7 @@ function FormPatient() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default FormPatient
+export default FormPatient;

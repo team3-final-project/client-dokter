@@ -1,8 +1,25 @@
-import React from 'react'
-import { Navbar, Modal } from '../components/'
-import avatar from '../assets/man.png'
+import React, { useEffect } from "react";
+import { Navbar, Modal, CardListMedicalRecord } from "../components/";
+import avatar from "../assets/man.png";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMedicalRecordByPatientId, getPatientById } from "../store/actions";
 
-function ResultPatient(params) {
+function ResultPatient() {
+  const { id } = useParams();
+  const dispatch = useDispatch();
+
+  const patient = useSelector((state) => state.patient);
+  const medRecords = useSelector((state) => state.medicalRecord);
+
+  useEffect(() => {
+    dispatch(getPatientById(id));
+  }, [dispatch, id]);
+
+  useEffect(() => {
+    dispatch(getMedicalRecordByPatientId(id));
+  }, [dispatch, id]);
+
   return (
     <div>
       <Navbar />
@@ -15,9 +32,12 @@ function ResultPatient(params) {
                 <img src={avatar} alt="" className="mx-auto" />
               </div>
               <div className="col-10">
-                <h3>M. Dicky Andeyan Naratama</h3>
-                <p>Cianjur, 24 Desember 1995</p>
-                <p>Komplek GBA-2 Blok J5 no 32, Kab. Bandung</p>
+                <h3>
+                  {patient.name} - NIK: {patient.nik}
+                </h3>
+                <p>{patient.birth_date}</p>
+                <p>{patient.email}</p>
+                <p>{patient.address}</p>
               </div>
             </div>
             <div className="diag-btn">
@@ -25,26 +45,29 @@ function ResultPatient(params) {
                 type="button"
                 className="btn btn-success"
                 data-toggle="modal"
-                data-target="#exampleModalCenter">
+                data-target="#exampleModalCenter"
+              >
                 <i className="fas fa-plus"></i> Diagnosa
               </button>
             </div>
             <table className="table table-bordered">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Diagnose</th>
+                  <th scope="col">Medicine</th>
+                  <th scope="col">Dosis</th>
+                  <th scope="col">Jumlah Obat</th>
+                  <th scope="col">Actions</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
+                {medRecords.map((medRecord) => (
+                  <CardListMedicalRecord
+                    medRecord={medRecord}
+                    key={medRecord.id}
+                  />
+                ))}
               </tbody>
             </table>
           </div>
@@ -52,7 +75,7 @@ function ResultPatient(params) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ResultPatient
+export default ResultPatient;
