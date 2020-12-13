@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 import {
   Login,
   Dashboard,
   FormPatient,
   ResultPatient,
   ProfileDoctor,
-  ListPatient
-} from './pages/'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+  ListPatient,
+} from "./pages/";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -22,18 +22,18 @@ function App() {
         <Route path="/add-patient">
           <FormPatient />
         </Route>
-        <Route path="/result-patient">
-          <ResultPatient />
-        </Route>
         <Route path="/list-patient">
           <ListPatient />
+        </Route>
+        <Route path="/result-patient/:id">
+          <ResultPatient />
         </Route>
         <Route path="/profile-doctor">
           <ProfileDoctor />
         </Route>
       </Switch>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;

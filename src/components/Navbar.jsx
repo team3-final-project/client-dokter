@@ -1,8 +1,15 @@
-import React from 'react'
-import mainLogo from '../assets/logo.png'
-import { Link } from 'react-router-dom'
+import React from "react";
+import mainLogo from "../assets/logo.png";
+import { Link, useHistory } from "react-router-dom";
 
 function Navbar() {
+  const history = useHistory();
+
+  const handleLogoutClick = () => {
+    localStorage.clear();
+    history.push("/");
+  };
+
   return (
     <nav className="navbar navbar-expand-lg sticky-top navbar-light bg-light">
       <Link className="navbar-brand" to="/dashboard">
@@ -15,7 +22,8 @@ function Navbar() {
         data-target="#navbarNav"
         aria-controls="navbarNav"
         aria-expanded="false"
-        aria-label="Toggle navigation">
+        aria-label="Toggle navigation"
+      >
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
@@ -26,17 +34,18 @@ function Navbar() {
             </Link>
           </li>
           <li className="nav-item">
-            <Link
+            <p
               className="nav-link btn btn-danger"
-              to="/"
-              style={{ color: '#fff' }}>
+              onClick={() => handleLogoutClick()}
+              style={{ color: "#fff" }}
+            >
               Logout
-            </Link>
+            </p>
           </li>
         </ul>
       </div>
     </nav>
-  )
+  );
 }
 
-export default Navbar
+export default Navbar;

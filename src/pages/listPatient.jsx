@@ -1,12 +1,16 @@
-import React from 'react'
-import { Navbar } from '../components/'
-import { useHistory } from 'react-router-dom'
-function ListPatient() {
-  const history = useHistory()
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Navbar, CardListPatient } from "../components/";
+import { fetchPatients } from "../store/actions";
 
-  function navToDetails(params) {
-    history.push('/result-patient')
-  }
+function ListPatient() {
+  const dispatch = useDispatch();
+  const patients = useSelector((state) => state.patients);
+
+  useEffect(() => {
+    dispatch(fetchPatients());
+  }, [dispatch]);
+
   return (
     <div>
       <Navbar />
@@ -17,48 +21,24 @@ function ListPatient() {
             <thead className="thead-dark">
               <tr>
                 <th scope="col">No</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Options</th>
+                <th scope="col">NIK</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Birth Date</th>
+                <th scope="col">Address</th>
+                <th scope="col">Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td className="d-flex justify-content-center">
-                  <button className="btn btn-success" onClick={navToDetails}>
-                    See Details
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td className="d-flex justify-content-center">
-                  <button className="btn btn-success">See Details</button>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td className="d-flex justify-content-center">
-                  <button className="btn btn-success">See Details</button>
-                </td>
-              </tr>
+              {patients.map((patient, i) => (
+                <CardListPatient patient={patient} i={i + 1} key={patient.id} />
+              ))}
             </tbody>
           </table>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ListPatient
+export default ListPatient;

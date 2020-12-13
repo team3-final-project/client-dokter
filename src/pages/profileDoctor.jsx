@@ -1,7 +1,18 @@
-import React from 'react'
-import avatarDoctor from '../assets/doctor-avatar.png'
-import { Navbar } from '../components'
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import avatarDoctor from "../assets/doctor-avatar.png";
+import { Navbar } from "../components";
+import { getProfileDoctor } from "../store/actions";
+
 function ProfileDoctor() {
+  const dispatch = useDispatch();
+
+  const doctor = useSelector((state) => state.doctor);
+
+  useEffect(() => {
+    dispatch(getProfileDoctor());
+  }, [dispatch]);
+
   return (
     <div>
       <Navbar />
@@ -11,14 +22,14 @@ function ProfileDoctor() {
             <img src={avatarDoctor} alt="doc-avatar" />
           </div>
           <div className="card">
-            <h1>Dr. Setiabudhi</h1>
-            <p>Dokter Umum</p>
-            <p className="font-weight-bold">Jumlah Pasien: 10</p>
+            <h1>{doctor.name}</h1>
+            <p>{doctor.specialist}</p>
+            <p className="font-weight-bold">Jumlah Pasien: 0</p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default ProfileDoctor
+export default ProfileDoctor;

@@ -1,7 +1,34 @@
-import React from 'react'
-import logo from '../assets/logo.png'
+import axios from "../config/axios";
+import React, { useState } from "react";
+import logo from "../assets/logo.png";
+import { useHistory } from "react-router-dom";
 
 function Login() {
+  const history = useHistory();
+
+  const [name, setName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmitLogin = (e) => {
+    e.preventDefault();
+    axios({
+      method: "POST",
+      url: "/doctor",
+      data: {
+        name: name,
+        password: password,
+      },
+    })
+      .then((result) => {
+        const accessToken = result.data.access_token;
+        localStorage.setItem("access_token", accessToken);
+        history.push("/dashboard");
+      })
+      .catch((err) => {
+        console.log(err.response.data.msg);
+      });
+  };
+
   return (
     <div className="login-page mb-5">
       <div className=" container">
@@ -12,13 +39,14 @@ function Login() {
         <div className="d-flex justify-content-center">
           <div className="card">
             <div className="card-body">
-              <form>
+              <form onSubmit={(e) => handleSubmitLogin(e)}>
                 <div className="form-group">
                   <input
-                    type="email"
+                    type="text"
                     className="form-control"
                     aria-describedby="emailHelp"
                     placeholder="Username"
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="form-group">
@@ -26,6 +54,7 @@ function Login() {
                     type="password"
                     className="form-control"
                     placeholder="Password"
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <button type="submit" className="btn btn-success btn-block">
@@ -37,7 +66,7 @@ function Login() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Login
+export default Login;
