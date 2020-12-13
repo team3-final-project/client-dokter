@@ -19,8 +19,11 @@ const reducer = (state = initialState, action) => {
     case "SET_PATIENT_MEDICAL_RECORD":
       return { ...state, medicalRecord: action.payload };
     case "CREATE_MEDICAL_RECORD":
-      const newMedicalRecord = state.patients.concat(action.payload);
-      return { ...state, patients: newMedicalRecord };
+      const newMedicalRecord = state.medicalRecord.concat(action.payload);
+      return { ...state, medicalRecord: newMedicalRecord };
+    case "CREATE_PATIENT":
+      const newPatient = state.patients.concat(action.payload);
+      return { ...state, patients: newPatient };
     case "DELETE_MEDICAL_RECORD":
       const afterDeleteMedicalRecord = state.medicalRecord.filter(
         (medicalRec) => medicalRec.id !== action.payload
