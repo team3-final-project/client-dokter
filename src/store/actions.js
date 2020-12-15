@@ -154,3 +154,32 @@ export function getProfileDoctor() {
       });
   };
 }
+
+export function addNewPatient(nik, name, email, birth, address) {
+  return (dispatch) => {
+    const access_token = localStorage.getItem("access_token");
+    axios({
+      method: "POST",
+      url: `/doctor/patient`,
+      headers: {
+        access_token: access_token,
+      },
+      data: {
+        nik,
+        name,
+        email,
+        birth_date: birth,
+        address,
+      },
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "CREATE_PATIENT",
+          payload: data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
