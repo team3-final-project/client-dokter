@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 
 function CardListPatient(props) {
   const { patient, i } = props;
-
   const history = useHistory();
+
 
   function navToDetails(id) {
     history.push(`/result-patient/${id}`);

@@ -1,14 +1,34 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteMedicalRecord } from "../store/actions";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import swal from 'sweetalert'
 function CardListMedicalRecord(props) {
   const { medRecord } = props;
+
   const dispatch = useDispatch();
 
+
+
+
   const handleDeleteMedicalRecord = (id) => {
-    dispatch(deleteMedicalRecord(id));
-  };
+    swal({ 
+      title: 'Are you sure?', 
+      text: 'It will permanently deleted!',
+      icon: 'warning',
+      buttons: true, 
+      dangerMode: true
+    }).then(() => { 
+      dispatch(deleteMedicalRecord(id))
+      swal('Data has been deleted', { 
+        icon: 'success', 
+        button: false,
+        timer: 1000
+      })
+    })
+
+  }
 
   return (
     <>
@@ -19,12 +39,20 @@ function CardListMedicalRecord(props) {
         <td>{medRecord.dosis} x /Sehari</td>
         <td>{medRecord.jumlah_obat} Tablet</td>
         <td className="d-flex justify-content-center">
-          <button
-            onClick={() => handleDeleteMedicalRecord(medRecord.id)}
-            className="btn btn-danger"
-          >
-            X
-          </button>
+          <FontAwesomeIcon
+            onClick={() =>
+              handleDeleteMedicalRecord(medRecord.id)}
+            role="button"
+            icon={faTrash}
+            color="#C80000"
+          />
+          {/* <button
+              onClick={() =>
+                handleDeleteMedicalRecord(medRecord.id)}
+              className="btn btn-danger"
+            >
+              X
+          </button> */}
         </td>
       </tr>
     </>

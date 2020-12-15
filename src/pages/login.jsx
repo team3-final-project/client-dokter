@@ -2,6 +2,7 @@ import axios from "../config/axios";
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
+import swal from "sweetalert";
 
 function Login() {
   const history = useHistory();
@@ -21,10 +22,23 @@ function Login() {
     })
       .then((result) => {
         const accessToken = result.data.access_token;
+        swal({ 
+          title: "Success!", 
+          text: "welcome back", 
+          icon: "success", 
+          buttons: false,
+          timer:1500,
+        })
         localStorage.setItem("access_token", accessToken);
         history.push("/dashboard");
       })
       .catch((err) => {
+        swal({ 
+          title: "Error!", 
+          text: err.response.data.msg,
+          icon: 'error',
+          button: true,
+        })
         console.log(err.response.data.msg);
       });
   };
