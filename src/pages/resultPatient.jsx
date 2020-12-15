@@ -18,7 +18,7 @@ function ResultPatient() {
 
   useEffect(() => {
     dispatch(getMedicalRecordByPatientId(id));
-  }, [dispatch, id]);
+  }, [medRecords]);
 
   return (
     <div>

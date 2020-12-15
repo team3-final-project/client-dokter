@@ -1,4 +1,5 @@
 import axios from "../config/axios";
+import swal from 'sweetalert';
 
 export function fetchPatients() {
   return (dispatch) => {
@@ -92,6 +93,13 @@ export function addNewMedicalRecord(
       },
     })
       .then(({ data }) => {
+        swal({ 
+          title: 'Success!',
+          text: 'Data has been added',
+          icon: 'success', 
+          button: false,
+          timer: 1000
+        })
         dispatch({
           type: "CREATE_MEDICAL_RECORD",
           payload: data,
@@ -117,7 +125,7 @@ export function deleteMedicalRecord(id) {
         dispatch({
           type: "DELETE_MEDICAL_RECORD",
           payload: id,
-        });
+        })
       })
       .catch((err) => {
         console.log(err);
