@@ -1,5 +1,6 @@
 import axios from "../config/axios";
 import firebase from "../firebase.js"
+import swal from 'sweetalert';
 
 export function fetchPatients() {
   return (dispatch) => {
@@ -93,15 +94,33 @@ export function addNewMedicalRecord(
       },
     })
       .then( async ({ data }) => {
+        console.log('sudah teraction')
         const db = firebase.firestore()
+        
         await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').update({
           notification: true
         })
-        .then(async (data) => {
-          await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').get().then(value => {
-            console.log(value.data())
+
+        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
+          console.log(value.data(), "<<<< sebelum diupdate")
+        })
+        
+        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
+          refetching: true
+        }).then( async () => {
+          await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
+            console.log(value.data(), "<<<< setelah diupdate")
           })
         })
+        
+        swal({ 
+          title: 'Success!',
+          text: 'Data has been added',
+          icon: 'success', 
+          button: false,
+          timer: 1000
+        })
+
         dispatch({
           type: "CREATE_MEDICAL_RECORD",
           payload: data,
@@ -127,7 +146,7 @@ export function deleteMedicalRecord(id) {
         dispatch({
           type: "DELETE_MEDICAL_RECORD",
           payload: id,
-        });
+        })
       })
       .catch((err) => {
         console.log(err);
@@ -148,6 +167,35 @@ export function getProfileDoctor() {
       .then(({ data }) => {
         dispatch({
           type: "SET_DOCTOR_DETAIL",
+          payload: data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+
+export function addNewPatient(nik, name, email, birth, address) {
+  return (dispatch) => {
+    const access_token = localStorage.getItem("access_token");
+    axios({
+      method: "POST",
+      url: `/doctor/patient`,
+      headers: {
+        access_token: access_token,
+      },
+      data: {
+        nik,
+        name,
+        email,
+        birth_date: birth,
+        address,
+      },
+    })
+      .then(({ data }) => {
+        dispatch({
+          type: "CREATE_PATIENT",
           payload: data,
         });
       })

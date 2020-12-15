@@ -2,20 +2,9 @@ import axios from "../config/axios";
 import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
-import firebase from "../firebase.js"
+import swal from "sweetalert";
 
 function Login() {
-  const db = firebase.firestore()
-
-  useEffect(() => {
-    db.collection('med').get().then((value) => {
-      console.log(value.docs)
-      value.docs.forEach(el => {
-          console.log(el.data())
-          console.log(el.id)
-      })
-    })
-  })
 
   const history = useHistory();
 
@@ -34,10 +23,23 @@ function Login() {
     })
       .then((result) => {
         const accessToken = result.data.access_token;
+        swal({ 
+          title: "Success!", 
+          text: "welcome back", 
+          icon: "success", 
+          buttons: false,
+          timer:1500,
+        })
         localStorage.setItem("access_token", accessToken);
         history.push("/dashboard");
       })
       .catch((err) => {
+        swal({ 
+          title: "Error!", 
+          text: err.response.data.msg,
+          icon: 'error',
+          button: true,
+        })
         console.log(err.response.data.msg);
       });
   };

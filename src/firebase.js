@@ -1,6 +1,5 @@
 import firebase from 'firebase'
 
-
 const firebaseConfig = {
     apiKey: "AIzaSyAmSpsJELuQMMGHQwSiZKlt0rxDDKADqrg",
     authDomain: "med-notification-1c8a9.firebaseapp.com",
@@ -10,6 +9,10 @@ const firebaseConfig = {
     appId: "1:397709004556:web:40319a8a6eb95ba1390329"
   };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}else {
+    firebase.app(); // if already initialized, use that one
+}
 
 export default firebase
