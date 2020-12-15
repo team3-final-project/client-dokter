@@ -112,7 +112,6 @@ export function addNewMedicalRecord(
             console.log(value.data(), "<<<< setelah diupdate")
           })
         })
-        
         swal({ 
           title: 'Success!',
           text: 'Data has been added',
@@ -120,7 +119,6 @@ export function addNewMedicalRecord(
           button: false,
           timer: 1000
         })
-
         dispatch({
           type: "CREATE_MEDICAL_RECORD",
           payload: data,
