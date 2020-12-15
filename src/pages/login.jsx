@@ -1,9 +1,22 @@
 import axios from "../config/axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
+import firebase from "../firebase.js"
 
 function Login() {
+  const db = firebase.firestore()
+
+  useEffect(() => {
+    db.collection('med').get().then((value) => {
+      console.log(value.docs)
+      value.docs.forEach(el => {
+          console.log(el.data())
+          console.log(el.id)
+      })
+    })
+  })
+
   const history = useHistory();
 
   const [name, setName] = useState("");

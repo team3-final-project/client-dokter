@@ -1,4 +1,5 @@
 import axios from "../config/axios";
+import firebase from "../firebase.js"
 
 export function fetchPatients() {
   return (dispatch) => {
@@ -91,7 +92,16 @@ export function addNewMedicalRecord(
         PatientId: id,
       },
     })
-      .then(({ data }) => {
+      .then( async ({ data }) => {
+        const db = firebase.firestore()
+        await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').update({
+          notification: true
+        })
+        .then(async (data) => {
+          await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').get().then(value => {
+            console.log(value.data())
+          })
+        })
         dispatch({
           type: "CREATE_MEDICAL_RECORD",
           payload: data,
