@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar, Modal, CardListMedicalRecord } from "../components/";
 import avatar from "../assets/man.png";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMedicalRecordByPatientId, getPatientById } from "../store/actions";
+import firebase from "../firebase.js"
 
 function ResultPatient() {
   const { id } = useParams();
@@ -14,11 +15,37 @@ function ResultPatient() {
 
   useEffect(() => {
     dispatch(getPatientById(id));
-  }, [dispatch, id]);
+  }, []);
 
   useEffect(() => {
     dispatch(getMedicalRecordByPatientId(id));
-  }, [medRecords]);
+  }, []);
+
+  const db = firebase.firestore()
+
+  db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').onSnapshot(snapshot => {
+    console.log('tertrigger cuy')
+    refetchingData()
+  })
+
+  const refetchingData = async () => {
+    console.log('masuk kesini deh')
+
+    let data = false
+
+    await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then(value => {
+      data = value.data().refetching
+      console.log(data, '<<<< ini adalah data setelah tertrigger')
+    })
+
+    if(data){
+      dispatch(getMedicalRecordByPatientId(id))
+    }
+
+    await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
+      refetching: false
+    })
+  }
 
   return (
     <div>

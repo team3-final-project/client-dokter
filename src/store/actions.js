@@ -1,4 +1,5 @@
 import axios from "../config/axios";
+import firebase from "../firebase.js"
 import swal from 'sweetalert';
 
 export function fetchPatients() {
@@ -92,7 +93,25 @@ export function addNewMedicalRecord(
         PatientId: id,
       },
     })
-      .then(({ data }) => {
+      .then( async ({ data }) => {
+        console.log('sudah teraction')
+        const db = firebase.firestore()
+        
+        await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').update({
+          notification: true
+        })
+
+        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
+          console.log(value.data(), "<<<< sebelum diupdate")
+        })
+        
+        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
+          refetching: true
+        }).then( async () => {
+          await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
+            console.log(value.data(), "<<<< setelah diupdate")
+          })
+        })
         swal({ 
           title: 'Success!',
           text: 'Data has been added',

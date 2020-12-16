@@ -1,10 +1,11 @@
 import axios from "../config/axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/logo.png";
 import { useHistory } from "react-router-dom";
 import swal from "sweetalert";
 
 function Login() {
+
   const history = useHistory();
 
   const [name, setName] = useState("");
