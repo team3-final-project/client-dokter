@@ -104,7 +104,6 @@ export function addNewMedicalRecord(
         await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
           refetching: true
         })
-        
         swal({ 
           title: 'Success!',
           text: 'Data has been added',
@@ -112,7 +111,6 @@ export function addNewMedicalRecord(
           button: false,
           timer: 1000
         })
-
         dispatch({
           type: "CREATE_MEDICAL_RECORD",
           payload: data,
