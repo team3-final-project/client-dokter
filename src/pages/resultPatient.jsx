@@ -24,18 +24,15 @@ function ResultPatient() {
   const db = firebase.firestore()
 
   db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').onSnapshot(snapshot => {
-    console.log('tertrigger cuy')
     refetchingData()
   })
 
   const refetchingData = async () => {
-    console.log('masuk kesini deh')
 
     let data = false
 
     await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then(value => {
       data = value.data().refetching
-      console.log(data, '<<<< ini adalah data setelah tertrigger')
     })
 
     if(data){

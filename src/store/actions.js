@@ -2,6 +2,8 @@ import axios from "../config/axios";
 import firebase from "../firebase.js"
 import swal from 'sweetalert';
 
+const db = firebase.firestore()
+
 export function fetchPatients() {
   return (dispatch) => {
     const access_token = localStorage.getItem("access_token");
@@ -94,23 +96,13 @@ export function addNewMedicalRecord(
       },
     })
       .then( async ({ data }) => {
-        console.log('sudah teraction')
-        const db = firebase.firestore()
         
         await db.collection('med').doc('h5mjuGm0apJBldX6fMc7').update({
           notification: true
         })
-
-        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
-          console.log(value.data(), "<<<< sebelum diupdate")
-        })
         
         await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
           refetching: true
-        }).then( async () => {
-          await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').get().then((value) => {
-            console.log(value.data(), "<<<< setelah diupdate")
-          })
         })
         
         swal({ 
@@ -142,7 +134,12 @@ export function deleteMedicalRecord(id) {
         access_token: access_token,
       },
     })
-      .then(({ data }) => {
+      .then(async ({ data }) => {
+
+        await db.collection('refetching-med').doc('zpeLfcCi7dRIpgV8DhMi').update({
+          refetching: true
+        })
+
         dispatch({
           type: "DELETE_MEDICAL_RECORD",
           payload: id,
