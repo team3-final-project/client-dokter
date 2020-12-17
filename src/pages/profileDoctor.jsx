@@ -24,7 +24,7 @@ function ProfileDoctor() {
           <div className="card">
             <h1>{doctor.name}</h1>
             <p>{doctor.specialist}</p>
-            <p className="font-weight-bold">Jumlah Pasien: 0</p>
+            <p className="font-weight-bold">Total Patient: 10</p>
           </div>
         </div>
       </div>

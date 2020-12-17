@@ -24,7 +24,7 @@ function Login() {
         const accessToken = result.data.access_token
         swal({
           title: 'Success!',
-          text: 'Selamat datang kembali!',
+          text: 'Welcome back!',
           icon: 'success',
           buttons: false,
           timer: 1500
@@ -49,7 +49,7 @@ function Login() {
         <div className="logo-container">
           <img src={logo} alt="logo" />
         </div>
-        <p className="text-center mt-3">Masukkan Akun Terlebih Dahulu</p>
+        <p className="text-center mt-3">Enter your account information</p>
         <div className="d-flex justify-content-center">
           <div className="card">
             <div className="card-body">
@@ -69,12 +69,12 @@ function Login() {
                     required
                     type="password"
                     className="form-control"
-                    placeholder="Kata Sandi"
+                    placeholder="password"
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <button type="submit" className="btn btn-success btn-block">
-                  Masuk
+                  Log in
                 </button>
               </form>
             </div>
