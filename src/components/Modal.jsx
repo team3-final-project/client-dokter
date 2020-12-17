@@ -14,7 +14,6 @@ function Modal() {
   const [jumlahObat, setJumlahObat] = useState("");
 
   const handleSubmitDiagnose = (e) => {
-    console.log('masuk modal')
     e.preventDefault();
     dispatch(
       addNewMedicalRecord(id, date, diagnose, medicineName, dosis, jumlahObat)
