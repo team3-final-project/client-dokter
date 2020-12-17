@@ -1,23 +1,23 @@
-import React from "react";
-import medicalIcon from "../assets/medical-file.png";
-import folderIcon from "../assets/folder.png";
-import doctorIcon from "../assets/doctor.png";
-import { Navbar } from "../components/";
-import { useHistory } from "react-router-dom";
+import React from 'react'
+import medicalIcon from '../assets/medical-file.png'
+import folderIcon from '../assets/folder.png'
+import doctorIcon from '../assets/doctor.png'
+import { Navbar } from '../components/'
+import { useHistory } from 'react-router-dom'
 
 function Dashboard() {
-  const history = useHistory();
+  const history = useHistory()
 
   function navToAdd() {
-    history.push("/add-patient");
+    history.push('/add-patient')
   }
 
   function navToProfile() {
-    history.push("/profile-doctor");
+    history.push('/profile-doctor')
   }
 
   function navToList() {
-    history.push("/list-patient");
+    history.push('/list-patient')
   }
 
   return (
@@ -25,7 +25,7 @@ function Dashboard() {
       <Navbar />
       <div className="dashboard">
         <div className="container">
-          <h1 className="mt-3 mb-3">Dashboard</h1>
+          <h1 className="mt-3 mb-5">Beranda</h1>
           <div className="row">
             <div className="col-lg-4 col-xs-12 mb-3" onClick={navToAdd}>
               <div className="card card-dash">
@@ -79,7 +79,7 @@ function Dashboard() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Dashboard;
+export default Dashboard
