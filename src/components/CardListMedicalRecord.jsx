@@ -10,8 +10,6 @@ function CardListMedicalRecord(props) {
   const dispatch = useDispatch();
 
 
-
-
   const handleDeleteMedicalRecord = (id) => {
     swal({ 
       title: 'Are you sure?', 
@@ -46,13 +44,6 @@ function CardListMedicalRecord(props) {
             icon={faTrash}
             color="#C80000"
           />
-          {/* <button
-              onClick={() =>
-                handleDeleteMedicalRecord(medRecord.id)}
-              className="btn btn-danger"
-            >
-              X
-          </button> */}
         </td>
       </tr>
     </>

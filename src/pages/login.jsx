@@ -11,10 +11,11 @@ function Login() {
   const [password, setPassword] = useState('')
 
   const handleSubmitLogin = (e) => {
+    console.log('masuk sini', name, password)
     e.preventDefault()
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/doctor',
+      url: '/doctor',
       data: {
         name: name,
         password: password

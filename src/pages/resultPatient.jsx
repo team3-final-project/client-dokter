@@ -86,10 +86,10 @@ function ResultPatient() {
                 </tr>
               </thead>
               <tbody>
-                {medRecords.map((medRecord) => (
+                {medRecords.map((medRecord, i) => (
                   <CardListMedicalRecord
                     medRecord={medRecord}
-                    key={medRecord.id}
+                    key={i}
                   />
                 ))}
               </tbody>
