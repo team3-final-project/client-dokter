@@ -71,7 +71,7 @@ function ResultPatient() {
                 data-toggle="modal"
                 data-target="#exampleModalCenter"
               >
-                <i className="fas fa-plus"></i> Diagnosa
+                <i className="fas fa-plus"></i> Diagnose
               </button>
             </div>
             <table className="table table-bordered">
@@ -80,8 +80,8 @@ function ResultPatient() {
                   <th scope="col">Date</th>
                   <th scope="col">Diagnose</th>
                   <th scope="col">Medicine</th>
-                  <th scope="col">Dosis</th>
-                  <th scope="col">Jumlah Obat</th>
+                  <th scope="col">Dosage</th>
+                  <th scope="col">Quantity</th>
                   <th scope="col">Actions</th>
                 </tr>
               </thead>

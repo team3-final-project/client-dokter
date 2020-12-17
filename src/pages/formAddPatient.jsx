@@ -31,7 +31,7 @@ function FormPatient() {
           </div>
         </div>
         <div>
-          <h3 className="text-center">Tambah Data Pasien</h3>
+          <h3 className="text-center">Insert New Patient</h3>
         </div>
         <div className="d-flex justify-content-center">
           <div className="card">
@@ -42,15 +42,17 @@ function FormPatient() {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="NIK"
                     onChange={(e) => setNik(e.target.value)}
                     required
                   />
                 </div>
                 <div className="form-group">
-                  <label>Nama Lengkap:</label>
+                  <label>Full name:</label>
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Full name"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
@@ -59,6 +61,7 @@ function FormPatient() {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
@@ -67,6 +70,7 @@ function FormPatient() {
                   <input
                     type="date"
                     className="form-control"
+                    placeholder="Birth date"
                     onChange={(e) => setBirth(e.target.value)}
                   />
                 </div>
@@ -75,6 +79,7 @@ function FormPatient() {
                   <input
                     type="text"
                     className="form-control"
+                    placeholder="Address"
                     onChange={(e) => setAddress(e.target.value)}
                   />
                 </div>

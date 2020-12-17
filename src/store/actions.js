@@ -9,7 +9,7 @@ export function fetchPatients() {
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'GET',
-      url: 'http://localhost:3000/doctor/patients',
+      url: 'http://192.168.1.71:3001/doctor/patients',
       headers: {
         access_token: access_token
       }
@@ -31,7 +31,7 @@ export function getPatientById(id) {
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'GET',
-      url: `http://localhost:3000/medical-record/patient/${id}`,
+      url: `http://192.168.1.71:3001/medical-record/patient/${id}`,
       headers: {
         access_token: access_token
       }
@@ -53,7 +53,7 @@ export function getMedicalRecordByPatientId(id) {
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'GET',
-      url: `http://localhost:3000/medical-record/${id}`,
+      url: `http://192.168.1.71:3001/medical-record/${id}`,
       headers: {
         access_token: access_token
       }
@@ -82,7 +82,7 @@ export function addNewMedicalRecord(
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'POST',
-      url: `http://localhost:3000/medical-record`,
+      url: `http://192.168.1.71:3001/medical-record`,
       headers: {
         access_token: access_token
       },
@@ -128,7 +128,7 @@ export function deleteMedicalRecord(id) {
   return (dispatch) => {
     const access_token = localStorage.getItem('access_token')
     axios({
-      url: `http://localhost:3000/medical-record/${id}`,
+      url: `http://192.168.1.71:3001/medical-record/${id}`,
       method: 'DELETE',
       headers: {
         access_token: access_token
@@ -158,7 +158,7 @@ export function getProfileDoctor() {
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'GET',
-      url: `http://localhost:3000/doctor/detail`,
+      url: `http://192.168.1.71:3001/doctor/detail`,
       headers: {
         access_token: access_token
       }
@@ -180,7 +180,7 @@ export function addNewPatient(nik, name, email, birth, address) {
     const access_token = localStorage.getItem('access_token')
     axios({
       method: 'POST',
-      url: `http://localhost:3000/doctor/patient`,
+      url: `http://192.168.1.71:3001/doctor/patient`,
       headers: {
         access_token: access_token
       },
