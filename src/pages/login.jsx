@@ -11,7 +11,6 @@ function Login() {
   const [password, setPassword] = useState('')
 
   const handleSubmitLogin = (e) => {
-    console.log('masuk sini', name, password)
     e.preventDefault()
     axios({
       method: 'POST',
