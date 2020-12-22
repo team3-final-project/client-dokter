@@ -14,7 +14,7 @@ function Login() {
     e.preventDefault()
     axios({
       method: 'POST',
-      url: 'http://localhost:3000/doctor',
+      url: '/doctor',
       data: {
         name: name,
         password: password

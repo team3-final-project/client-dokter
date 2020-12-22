@@ -36,7 +36,7 @@ function FormPatient() {
         <div className="d-flex justify-content-center">
           <div className="card">
             <div className="card-body">
-              <form onSubmit={(e) => handleSubmitAdd(e)}>
+              <form onSubmit={handleSubmitAdd}>
                 <div className="form-group">
                   <label>NIK:</label>
                   <input
